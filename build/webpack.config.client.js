@@ -33,7 +33,7 @@ let config
 
 if(isDev){
     config = merge(baseConfig, {
-        devtool: '@cheap-module-eval-source-map',
+        // devtool: '@cheap-module-eval-source-map',
         module: {
             rules: [
                 {
@@ -55,14 +55,14 @@ if(isDev){
         devServer,
         plugins: defaultPlugins.concat([
             new webpack.HotModuleReplacementPlugin(),
-            new webpack.NoEmitOnErrorsPlugin()
+            // new webpack.NoEmitOnErrorsPlugin()
         ])
     })
 } else {
     config = merge(baseConfig, {
         entry: {
-            app: path.join(__dirname, '../client/index.js'),
-            vendor: ['vue']
+            app: path.join(__dirname, '../client/index.js')
+            // vendor: ['vue']
         },
         output: {
             filename: '[name].[chunkhash:8].js'
@@ -85,7 +85,20 @@ if(isDev){
                 }
             ]
         },
-        plugins: defaultPlugins.concat([])
+        optimization: {
+            splitChunks: {
+                chunks: 'all'
+            },
+            runtimeChunk: true
+        },
+        plugins: defaultPlugins.concat([
+            // new webpack.optimize.CommonsChunkPlugin({
+            //     name: 'vendor'
+            // }),
+            // new webpack.optimize.CommonsChunkPlugin({
+            //     name: 'runtime'
+            // })
+        ])
     })
 }
 

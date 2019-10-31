@@ -1,9 +1,10 @@
 const path = require('path')
+const createVueLoaderOptions = require('./vue-loader.config')
 
 const isDev = process.env.NODE_ENV === 'development'
 
 const config = {
-    mode: 'none',
+    mode: process.env.NODE_ENV || 'production', //development || production
     target: 'web',
     entry: path.join(__dirname, '../client/index.js'),
     output: {
@@ -12,9 +13,16 @@ const config = {
     },
     module: {
         rules: [
+            { 
+                test: /\.(vue|js|jsx)$/,
+                loader: 'eslint-loader',
+                exclude: __dirname +'node-modules',
+                enforce: 'pre'
+            },
             {
                 test: /\.vue$/,
-                loader: 'vue-loader'
+                loader: 'vue-loader',
+                options: createVueLoaderOptions(isDev)
             },
             {
                 test: /\.jsx$/,
