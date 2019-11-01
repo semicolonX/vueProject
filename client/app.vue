@@ -2,6 +2,8 @@
   <div id="app">
     <div id="cover"></div>
     <Header></Header>
+    <router-link to="/app">toApp</router-link>
+    <router-link to="/login">toLogin</router-link>
     <router-view />
     <Footer></Footer>
   </div>

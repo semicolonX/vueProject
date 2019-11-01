@@ -1,5 +1,5 @@
 <template>
-    <div></div>
+    <div>this is login vue</div>
 </template>
 
 <script>

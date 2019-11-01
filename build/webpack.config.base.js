@@ -13,10 +13,11 @@ const config = {
     },
     module: {
         rules: [
-            { 
+            {
                 test: /\.(vue|js|jsx)$/,
                 loader: 'eslint-loader',
-                exclude: __dirname +'node-modules',
+                exclude: '/node-modules/',
+                // include: __dirname + 'client',
                 enforce: 'pre'
             },
             {

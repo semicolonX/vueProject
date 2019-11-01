@@ -25,6 +25,9 @@ const devServer = {
     overlay: {
         errors: true
     },
+    historyApiFallback: {
+      index: '/index.html'
+    },
     // open: true,
     hot: true
 }
@@ -33,7 +36,7 @@ let config
 
 if(isDev){
     config = merge(baseConfig, {
-        // devtool: '@cheap-module-eval-source-map',
+        devtool: 'cheap-module-eval-source-map',
         module: {
             rules: [
                 {
