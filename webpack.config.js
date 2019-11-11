@@ -70,6 +70,29 @@ if(isDev){
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin()
     )
+} else {
+  config.entry = {    //优化：单独打包
+      app: path.join(__dirname, 'src/index.js'),
+      vendor: ['vue']
+  }
+  config.output.filename = '[name].[chunkhash:8].js'
+  config.module.rules.push({
+      test: /\.styl/,
+      use: [
+          'css-loader',
+          {
+              loader: 'postcss-loader',
+              options: {
+                  //用于解决url()路径解析错误
+                  url:false,
+                  minimize:true,
+                  sourceMap: true
+              }
+          },
+          'stylus-loader'
+      ]
+  })
+
 }
 
 module.exports = config
